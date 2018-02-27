@@ -1,0 +1,211 @@
+<html>
+	<body bgcolor=#000000>
+	<button onclick="clockDn()">D</button>
+	<button onclick="clockUp()">U</button>
+	<button onclick="myStopFunction()">Stop time</button>
+	<button onclick="myStartFunction()">Start Time</button>
+	<center>
+	<table style="width: 1000px;">
+		<tr>
+			<td>
+				<center>
+				<canvas id="myCanvas" width="1000" height="700"></canvas>
+				</center>
+			</td>
+			<td>
+				<table style="height: 700px;">
+					<tbody>
+					<tr>
+						<td>
+							<button onclick="butt1()">butt1</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button onclick="butt2()">butt2</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button onclick="butt3()">butt3</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button onclick="butt4()">butt4</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
+
+
+		<script>
+			var canvas = document.getElementById('myCanvas');
+			var c = canvas.getContext('2d');
+
+			var clock = 10;
+
+			function clockDn(){
+				clock = clock - 10;
+				console.log(clock);
+			}
+
+			function clockUp(){
+				clock = clock + 10;
+				console.log(clock);
+			}
+
+
+			//for time, if needed
+			var RightMeow = (new Date()).getTime();
+
+			//starts the main loop variable
+			var myVar = setInterval(function(){ myTimer() }, clock);
+
+			//needed for proper mouse location
+			var WhereAmI = canvas.getBoundingClientRect();
+
+			//start defining dot array
+			var DotArray = [[],[],[]];
+			var NumberOfDots = 125;
+
+			//zero out dot array
+			for (var i = 0; i<NumberOfDots; i++){
+				DotArray[0].push(0);
+				DotArray[1].push(0);
+				DotArray[2].push(0);
+			}
+			//random location, for now
+			for (var i = 0; i<NumberOfDots; i++){
+				DotArray[0][i] = (Math.random()*500)-250;
+				DotArray[1][i] = (Math.random()*500)-250;
+				DotArray[2][i] = (Math.random()*500)-250;
+			}
+			
+			//the super-sexy-swinging 3D "engine"
+			function XYZRot(xy,z,a){
+				var dist, ang, rot, tempxy, tempz;
+				for (var i = 0; i<NumberOfDots; i++){
+					dist = Math.sqrt(Math.pow(xy[i],2)+Math.pow(z[i],2));
+					ang = Math.atan2(xy[i],z[i]);
+					rot = ang + a/100;
+					tempxy = Math.sin(rot) * dist;
+					tempz = Math.cos(rot) * dist;
+					xy[i] = tempxy;
+					z[i] = tempz;
+				}
+			}
+
+			//the main loop function
+			function myTimer() {
+			
+				//clear screen
+				c.clearRect(0,0,1000,700);
+
+				//if button press is down
+				if(Activate == 1){
+					console.log("lol clicks")
+				}
+				
+				//used for mouse differentials
+				DMX = MX-MMX;
+				DMY = MY-MMY;
+				MMX = MX;
+				MMY = MY;
+
+				//if mouse moved, do what
+				if(DMX != 0){
+					XYZRot(DotArray[0],DotArray[2],DMX);
+				}
+
+				if(DMY != 0){
+					XYZRot(DotArray[1],DotArray[2],DMY);
+				}
+
+
+
+				//DRAW ALL THE THINGS
+
+
+				
+				for (var i = 0; i<NumberOfDots; i++){
+					c.fillStyle = 'rgb(' + parseInt(((DotArray[2][i]+250)/500)*255) + ',' + parseInt(((DotArray[2][i]+250)/550)*255) + ',' + parseInt(((DotArray[2][i]+250)/500)*255) + ')';
+					c.fillRect(DotArray[0][i]+500,DotArray[1][i]+350,((DotArray[2][i]+250)/500)*3,((DotArray[2][i]+250)/500)*3);
+				}
+
+
+
+				//draw the "mouse"
+				c.fillStyle = "#FF00FF";
+				c.fillRect(MX,MY,3,3);
+
+
+
+
+
+				//___for mouse positioning
+				WhereAmI = canvas.getBoundingClientRect();
+				//console.log(WhereAmI);
+				//console.log(WhereAmI.x);
+				//console.log(WhereAmI.y);
+
+
+			}
+
+			//stops loop function
+			function myStopFunction() {
+				clearInterval(myVar);
+			}
+
+			//starts loop function
+			function myStartFunction() {
+				myVar = setInterval(function(){ myTimer() }, clock);
+				DotArray[0][0] = 44;
+				DotArray[1][0] = 77;
+				DotArray[2][0] = 11;
+				console.log(DotArray);
+			}
+
+
+			
+			var MX = 0;
+			var MY = 0;
+			var MMX = 0;
+			var MMY = 0;
+			var DMX = 0;
+			var DMY = 0;
+
+			var Activate = 0;
+
+			//mouse move
+			window.addEventListener('mousemove',function(event){
+				//console.log(event);
+				DMX = MX + event.x-WhereAmI.x;
+				DMY = MY + event.y-WhereAmI.y;
+				MX = event.x-WhereAmI.x;
+				MY = event.y-WhereAmI.y;
+			})
+
+			//mouse down
+			window.addEventListener('mousedown',function(event){
+				Activate = 1;
+				MX = event.x-WhereAmI.x;
+				MY = event.y-WhereAmI.y;
+				console.log("oh hai",MX,MY);
+			})
+
+			//mouse up
+			window.addEventListener('mouseup',function(event){
+				Activate = 0;
+			})
+
+
+
+		</script>
+	</body>
+</html>
