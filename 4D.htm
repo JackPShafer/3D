@@ -73,7 +73,19 @@
 			//start defining dot array
 			var DotArray = [[],[],[]];
 			var NumberOfDots = 500;
+			var SizeOfCube = 5;
+			
+			for (var i = 0; i < SizeOfCube; i++){
+				for (var j = 0; j < SizeOfCube; j++){
+					for (var k = 0; k < SizeOfCube; k++){
+						DotArray[0].push(i);
+						DotArray[1].push(j);
+						DotArray[2].push(k);
+					}
+				}
+			}
 
+			/* -- old code
 			//zero-out dot array
 			//also generates the size of the arrays
 			//by pushing zeros into place
@@ -88,6 +100,7 @@
 				DotArray[1][i] = (Math.random()*500)-250;
 				DotArray[2][i] = (Math.random()*500)-250;
 			}
+			*/
 			
 			//the super-sexy-swinging 3D "engine"
 			function XYZRot(xy,z,a){
