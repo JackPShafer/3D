@@ -1,5 +1,5 @@
 <html>
-	<body bgcolor=#001111>
+	<body bgcolor=#FFFFFF>
 	<button onclick="clockDn()">D</button>
 	<button onclick="clockUp()">U</button>
 	<button onclick="myStopFunction()">Stop time</button>
@@ -82,9 +82,9 @@
 			}
 			//random location, for now
 			for (var i = 0; i<NumberOfDots; i++){
-				DotArray[0][i] = (Math.random()*500)-250;
-				DotArray[1][i] = (Math.random()*500)-250;
-				DotArray[2][i] = (Math.random()*500)-250;
+				DotArray[0][i] = i;
+				DotArray[1][i] = i;
+				DotArray[2][i] = i;
 			}
 			
 			//the super-sexy-swinging 3D "engine"
