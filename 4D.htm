@@ -72,15 +72,16 @@
 
 			//start defining dot array
 			var DotArray = [[],[],[]];
-			var NumberOfDots = 500;
-			var SizeOfCube = 5;
+			
+			var SizeOfCube = 10;
+			var NumberOfDots = SizeOfCube**3;
 			
 			for (var i = 0; i < SizeOfCube; i++){
 				for (var j = 0; j < SizeOfCube; j++){
 					for (var k = 0; k < SizeOfCube; k++){
-						DotArray[0].push((i*100)-250);
-						DotArray[1].push((j*100)-250);
-						DotArray[2].push((k*100)-250);
+						DotArray[0].push((i*(500/SizeOfCube))-250);
+						DotArray[1].push((j*(500/SizeOfCube))-250);
+						DotArray[2].push((k*(500/SizeOfCube))-250);
 					}
 				}
 			}
@@ -150,8 +151,9 @@
 				
 				for (var i = 0; i<NumberOfDots; i++){
 					//c.fillStyle = 'rgb(' + parseInt(((DotArray[2][i]+250)/500)*255) + ',' + parseInt(((DotArray[2][i]+250)/550)*255) + ',' + parseInt(((DotArray[2][i]+250)/500)*255) + ')';
-					c.fillStyle = 'rgb(255,0,0)';
-					c.fillRect(DotArray[0][i]+500,DotArray[1][i]+350,((DotArray[2][i]+250)/500)*9,((DotArray[2][i]+250)/500)*3);
+					c.fillStyle = 'rgb(0,0,0)';
+					//c.fillRect(DotArray[0][i]+500,DotArray[1][i]+350,((DotArray[2][i]+250)/500)*9,((DotArray[2][i]+250)/500)*3);
+					c.fillRect(DotArray[0][i]+500,DotArray[1][i]+350,2,2);
 				}
 
 
