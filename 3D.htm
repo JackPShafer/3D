@@ -1,5 +1,5 @@
 <html>
-	<body bgcolor=#FFFFFF>
+	<body bgcolor=#002222>
 	<button onclick="clockDn()">D</button>
 	<button onclick="clockUp()">U</button>
 	<button onclick="myStopFunction()">Stop time</button>
@@ -72,7 +72,7 @@
 
 			//start defining dot array
 			var DotArray = [[],[],[]];
-			var NumberOfDots = 1000;
+			var NumberOfDots = 500;
 
 			//zero-out dot array
 			//also generates the size of the arrays
@@ -84,9 +84,9 @@
 			}
 			//random location, for now
 			for (var i = 0; i<NumberOfDots; i++){
-				DotArray[0][i] = i;
-				DotArray[1][i] = i;
-				DotArray[2][i] = i;
+				DotArray[0][i] = (Math.random()*500)-250;
+				DotArray[1][i] = (Math.random()*500)-250;
+				DotArray[2][i] = (Math.random()*500)-250;
 			}
 			
 			//the super-sexy-swinging 3D "engine"
