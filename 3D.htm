@@ -1,5 +1,5 @@
 <html>
-	<body bgcolor=#000000>
+	<body bgcolor=#002222>
 	<button onclick="clockDn()">D</button>
 	<button onclick="clockUp()">U</button>
 	<button onclick="myStopFunction()">Stop time</button>
@@ -72,7 +72,7 @@
 
 			//start defining dot array
 			var DotArray = [[],[],[]];
-			var NumberOfDots = 1500;
+			var NumberOfDots = 1000;
 
 			//zero-out dot array
 			for (var i = 0; i<NumberOfDots; i++){
@@ -135,7 +135,7 @@
 				
 				for (var i = 0; i<NumberOfDots; i++){
 					c.fillStyle = 'rgb(' + parseInt(((DotArray[2][i]+250)/500)*128) + ',' + parseInt(((DotArray[2][i]+250)/550)*255) + ',' + parseInt(((DotArray[2][i]+250)/500)*255) + ')';
-					c.fillRect(DotArray[0][i]+500,DotArray[1][i]+350,((DotArray[2][i]+250)/500)*4,((DotArray[2][i]+250)/500)*4);
+					c.fillRect(DotArray[0][i]+500,DotArray[1][i]+350,((DotArray[2][i]+250)/500)*2,((DotArray[2][i]+250)/500)*9);
 				}
 
 
